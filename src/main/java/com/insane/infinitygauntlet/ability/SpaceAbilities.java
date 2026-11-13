@@ -125,7 +125,8 @@ public final class SpaceAbilities {
         Vec3 end = from.add(direction.scale(maxDist));
         BlockHitResult hit = level.clip(new net.minecraft.world.level.ClipContext(
                 from, end, net.minecraft.world.level.ClipContext.Block.COLLIDER,
-                net.minecraft.world.level.ClipContext.Fluid.NONE, null));
+                net.minecraft.world.level.ClipContext.Fluid.NONE,
+                net.minecraft.world.phys.shapes.CollisionContext.empty()));
         if (hit.getType() == HitResult.Type.BLOCK) {
             BlockPos pos = hit.getBlockPos();
             return new Vec3(pos.getX() + 0.5, pos.getY() + 1.1, pos.getZ() + 0.5);

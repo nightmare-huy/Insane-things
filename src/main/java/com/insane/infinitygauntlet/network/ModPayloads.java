@@ -8,9 +8,9 @@ import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
+import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
-import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 
 /** Регистрация пакетов управления и клиентских визуальных эффектов. */
 public final class ModPayloads {
@@ -27,7 +27,7 @@ public final class ModPayloads {
     }
 
     public record CycleStonePayload() implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<CycleStonePayload> TYPE = type("cycle_stone");
+        public static final CustomPacketPayload.Type<CycleStonePayload> TYPE = createType("cycle_stone");
         public static final StreamCodec<RegistryFriendlyByteBuf, CycleStonePayload> STREAM_CODEC =
                 StreamCodec.unit(new CycleStonePayload());
 
@@ -42,7 +42,7 @@ public final class ModPayloads {
     }
 
     public record CycleAbilityPayload() implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<CycleAbilityPayload> TYPE = type("cycle_ability");
+        public static final CustomPacketPayload.Type<CycleAbilityPayload> TYPE = createType("cycle_ability");
         public static final StreamCodec<RegistryFriendlyByteBuf, CycleAbilityPayload> STREAM_CODEC =
                 StreamCodec.unit(new CycleAbilityPayload());
 
@@ -57,7 +57,7 @@ public final class ModPayloads {
     }
 
     public record ActivateAbilityPayload() implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<ActivateAbilityPayload> TYPE = type("activate_ability");
+        public static final CustomPacketPayload.Type<ActivateAbilityPayload> TYPE = createType("activate_ability");
         public static final StreamCodec<RegistryFriendlyByteBuf, ActivateAbilityPayload> STREAM_CODEC =
                 StreamCodec.unit(new ActivateAbilityPayload());
 
@@ -72,7 +72,7 @@ public final class ModPayloads {
     }
 
     public record SnapPayload() implements CustomPacketPayload {
-        public static final CustomPacketPayload.Type<SnapPayload> TYPE = type("snap");
+        public static final CustomPacketPayload.Type<SnapPayload> TYPE = createType("snap");
         public static final StreamCodec<RegistryFriendlyByteBuf, SnapPayload> STREAM_CODEC =
                 StreamCodec.unit(new SnapPayload());
 
@@ -86,7 +86,7 @@ public final class ModPayloads {
         }
     }
 
-    private static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> type(String path) {
+    private static <T extends CustomPacketPayload> CustomPacketPayload.Type<T> createType(String path) {
         return new CustomPacketPayload.Type<>(ResourceLocation.fromNamespaceAndPath(InfinityGauntletMod.MOD_ID, path));
     }
 }

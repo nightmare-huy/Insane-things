@@ -11,6 +11,7 @@ permissions:
 
 jobs:
   build:
+    if: "!contains(github.event.head_commit.message, '[skip ci]')"
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
@@ -28,23 +29,29 @@ jobs:
       - name: Build Mod JAR with Gradle
         run: |
           chmod +x gradlew
-          ./gradlew build --no-daemon --stacktrace
+          set +e
+          ./gradlew build --no-daemon > build.log 2>&1
+          CODE=$?
+          cat build.log
+          if [ $CODE -ne 0 ]; then
+            ERR=$(grep -E "error:|FAILURE:|What went wrong|> " build.log | tail -n 35 | tr '\n' ' ')
+            echo "::error title=GradleBuildError::$ERR"
+            exit $CODE
+          fi
 
-      - name: Upload Mod JAR Artifact
-        uses: actions/upload-artifact@v4
-        with:
-          name: infinity_gauntlet-1.0.0
-          path: build/libs/*.jar
-
-      - name: Publish Release JAR
+      - name: Publish Release JAR and Commit to Branch
         if: success()
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir -p releases
           cp build/libs/infinity_gauntlet-1.0.0.jar releases/infinity_gauntlet-1.0.0.jar
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add -f releases/infinity_gauntlet-1.0.0.jar
+          git diff --cached --quiet || (git commit -m "Собран релизный JAR мода infinity_gauntlet-1.0.0.jar [skip ci]" && git push origin HEAD:${{ github.ref_name }})
           gh release create v1.0.0 build/libs/infinity_gauntlet-1.0.0.jar \
             --title "Перчатка Бесконечности v1.0.0 (Minecraft 1.21.1 / NeoForge)" \
-            --notes "Собранный .jar мода Перчатка Бесконечности для Minecraft 1.21.1 (NeoForge 21.1.176)." \
+            --notes "Готовый .jar файл мода «Перчатка Бесконечности» для Minecraft 1.21.1 (NeoForge 21.1.176)." \
             --target "${{ github.sha }}" || \
           gh release upload v1.0.0 build/libs/infinity_gauntlet-1.0.0.jar --clobber

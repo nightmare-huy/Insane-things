@@ -1,13 +1,12 @@
 package com.insane.infinitygauntlet.item;
 
 import com.insane.infinitygauntlet.ability.InsertionEffects;
-import com.insane.infinitygauntlet.client.InfinityGauntletRenderer;
+import com.insane.infinitygauntlet.network.ModPayloads.ActivateAbilityPayload;
 import com.insane.infinitygauntlet.registry.GauntletState;
 import com.insane.infinitygauntlet.registry.ModItems;
 import com.insane.infinitygauntlet.registry.StoneType;
 import com.insane.infinitygauntlet.util.GauntletHelper;
 import java.util.List;
-import java.util.function.Consumer;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
@@ -17,16 +16,14 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import com.insane.infinitygauntlet.network.ModPayloads.ActivateAbilityPayload;
 import net.minecraft.world.level.Level;
-import net.neoforged.neoforge.client.extensions.common.IClientItemExtensions;
+import net.neoforged.neoforge.network.PacketDistributor;
 
 /**
  * Перчатка Бесконечности.
  * Правая кнопка с камнем во второй руке — вставка камня (каноничный эффект).
  * Shift+правая кнопка — извлечь активный камень.
- * Рендерится объёмной 3D-моделью через BlockEntityWithoutLevelRenderer.
+ * Рендерится объёмной 3D-моделью через BlockEntityWithoutLevelRenderer (см. ClientSetup).
  */
 public class InfinityGauntletItem extends Item {
     public InfinityGauntletItem() {
@@ -72,7 +69,7 @@ public class InfinityGauntletItem extends Item {
 
         // Активация способности: клиент отправляет пакет на сервер
         if (level.isClientSide) {
-            net.neoforged.neoforge.network.PacketDistributor.sendToServer(new ActivateAbilityPayload());
+            PacketDistributor.sendToServer(new ActivateAbilityPayload());
             return InteractionResultHolder.sidedSuccess(gauntlet, true);
         }
         return InteractionResultHolder.sidedSuccess(gauntlet, false);
@@ -98,16 +95,5 @@ public class InfinityGauntletItem extends Item {
                         .withStyle(ChatFormatting.AQUA));
             }
         }
-    }
-
-    /** Клиентское расширение: объёмный 3D-рендер перчатки с камнями. */
-    @Override
-    public void initializeClient(Consumer<IClientItemExtensions> consumer) {
-        consumer.accept(new IClientItemExtensions() {
-            @Override
-            public BlockEntityWithoutLevelRenderer getCustomRenderer() {
-                return new InfinityGauntletRenderer();
-            }
-        });
     }
 }

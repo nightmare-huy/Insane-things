@@ -154,4 +154,9 @@ public final class PowerAbilities {
         }
         Effects.sound(level, eye, SoundEvents.BEACON_AMBIENT, 0.4F, 0.7F);
     }
+
+    /** Сброс таймера удержания потока разрушения при отпускании ПКМ. */
+    public static void endStream(ServerPlayer player) {
+        STREAM_START.remove(player.getUUID());
+    }
 }

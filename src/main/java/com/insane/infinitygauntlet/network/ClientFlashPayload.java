@@ -5,25 +5,26 @@ import com.insane.infinitygauntlet.client.ClientEffects;
 import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.neoforged.neoforge.network.Payload;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 /**
  * Сервер -> клиент: вспышка на весь экран (цвет + длительность) и тряска камеры.
  * Используется щелчком (белая вспышка 1с) и воскрешением (оранжевый фильтр 2с).
  */
-public record ClientFlashPayload(int color, int durationMs, int shakeMs) implements Payload {
+public record ClientFlashPayload(int color, int durationMs, int shakeMs) implements CustomPacketPayload {
     public static final StreamCodec<FriendlyByteBuf, ClientFlashPayload> STREAM_CODEC =
             StreamCodec.composite(
                     ByteBufCodecs.VAR_INT, ClientFlashPayload::color,
                     ByteBufCodecs.VAR_INT, ClientFlashPayload::durationMs,
                     ByteBufCodecs.VAR_INT, ClientFlashPayload::shakeMs,
                     ClientFlashPayload::new);
-    public static final Type<ClientFlashPayload> TYPE = new Type<>(
-            net.minecraft.resources.ResourceLocation.fromNamespaceAndPath(InfinityGauntletMod.MOD_ID, "client_flash"));
+    public static final CustomPacketPayload.Type<ClientFlashPayload> TYPE = new CustomPacketPayload.Type<>(
+            ResourceLocation.fromNamespaceAndPath(InfinityGauntletMod.MOD_ID, "client_flash"));
 
     @Override
-    public Type<? extends Payload> type() {
+    public Type<? extends CustomPacketPayload> type() {
         return TYPE;
     }
 

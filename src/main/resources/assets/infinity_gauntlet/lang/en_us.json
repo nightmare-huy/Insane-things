@@ -1,0 +1,63 @@
+{
+  "itemGroup.infinity_gauntlet": "Перчатка Бесконечности",
+  "item.infinity_gauntlet.infinity_gauntlet": "Перчатка Бесконечности",
+  "item.infinity_gauntlet.space_stone": "Камень Пространства",
+  "item.infinity_gauntlet.mind_stone": "Камень Разума",
+  "item.infinity_gauntlet.reality_stone": "Камень Реальности",
+  "item.infinity_gauntlet.power_stone": "Камень Силы",
+  "item.infinity_gauntlet.time_stone": "Камень Времени",
+  "item.infinity_gauntlet.soul_stone": "Камень Души",
+
+  "key.categories.infinity_gauntlet": "Перчатка Бесконечности",
+  "key.infinity_gauntlet.cycle_stone": "Сменить активный камень (V)",
+  "key.infinity_gauntlet.cycle_ability": "Сменить способность камня (B)",
+  "key.infinity_gauntlet.snap": "Щелчок Бесконечности (Shift + G)",
+
+  "ability.infinity_gauntlet.space.1": "1. Парные порталы",
+  "ability.infinity_gauntlet.space.2": "2. Телекинез (удержание / Shift — раздавить)",
+  "ability.infinity_gauntlet.space.3": "3. Фазовый сдвиг (Shift — сквозь стены)",
+  "ability.infinity_gauntlet.space.4": "4. Сингулярность (чёрная дыра)",
+
+  "ability.infinity_gauntlet.mind.1": "1. Непрерывный лазер Разума",
+  "ability.infinity_gauntlet.mind.2": "2. Псионический взрыв",
+  "ability.infinity_gauntlet.mind.3": "3. Контроль разума (телохранитель)",
+  "ability.infinity_gauntlet.mind.4": "4. Подавление и ясновидение",
+
+  "ability.infinity_gauntlet.reality.1": "1. Искажение плоти (животное / кубы)",
+  "ability.infinity_gauntlet.reality.2": "2. Трансмутация мира",
+  "ability.infinity_gauntlet.reality.3": "3. Иллюзия и клоны",
+  "ability.infinity_gauntlet.reality.4": "4. Разлом ландшафта и притяжение",
+
+  "ability.infinity_gauntlet.power.1": "1. Сокрушающий рывок-удар (3×3)",
+  "ability.infinity_gauntlet.power.2": "2. Планетарная ударная волна",
+  "ability.infinity_gauntlet.power.3": "3. Лунопад (метеорный дождь)",
+  "ability.infinity_gauntlet.power.4": "4. Поток разрушения (удержание)",
+
+  "ability.infinity_gauntlet.time.1": "1. Перемотка времени (6 с назад)",
+  "ability.infinity_gauntlet.time.2": "2. Временная петля (10 с / защита от смерти)",
+  "ability.infinity_gauntlet.time.3": "3. Поле стазиса (заморозка)",
+  "ability.infinity_gauntlet.time.4": "4. Ускорение времени (удержание)",
+
+  "ability.infinity_gauntlet.soul.1": "1. Астральный удар (чистый урон)",
+  "ability.infinity_gauntlet.soul.2": "2. Сбор душ (вытягивание жизни)",
+  "ability.infinity_gauntlet.soul.3": "3. Повелитель душ (призыв призраков)",
+  "ability.infinity_gauntlet.soul.4": "4. Зов Мира Душ (пассив: воскрешение)",
+
+  "tooltip.infinity_gauntlet.hint": "Камень в левой руке + ПКМ — вставить | Shift+ПКМ (пустая левая рука) — извлечь",
+  "tooltip.infinity_gauntlet.empty": "Гнёзда пусты (0/6)",
+  "tooltip.infinity_gauntlet.stones": "Камни Бесконечности: %s/%s",
+  "tooltip.infinity_gauntlet.active": "Активный камень: %s",
+  "tooltip.infinity_gauntlet.stone_hint": "Возьмите в левую руку и нажмите ПКМ Перчаткой Бесконечности",
+
+  "hud.infinity_gauntlet.no_stones": "Нет вставленных камней",
+  "hud.infinity_gauntlet.cooldown": "Перезарядка: %s с",
+  "hud.infinity_gauntlet.damaged": "⚠ Перчатка перегружена после Щелчка",
+
+  "message.infinity_gauntlet.no_stones": "В перчатке нет Камней Бесконечности!",
+  "message.infinity_gauntlet.stone_already_inserted": "Этот Камень Бесконечности уже вставлен!",
+  "message.infinity_gauntlet.stone_removed": "Извлечён: %s",
+  "message.infinity_gauntlet.cooldown": "Способность перезаряжается (%s с)",
+  "message.infinity_gauntlet.damaged": "Перчатка повреждена и дымится после Щелчка!",
+  "message.infinity_gauntlet.no_souls": "В Камне Души ещё нет поглощённых душ!",
+  "message.infinity_gauntlet.snap_need_stones": "Для Щелчка необходимы все 6 Камней Бесконечности!"
+}
